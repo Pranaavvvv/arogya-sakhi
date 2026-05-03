@@ -1,0 +1,237 @@
+.emergency-page {
+  min-height: 100vh;
+  background: #FFF5F5;
+}
+
+.emergency-content {
+  padding: 0 16px;
+}
+
+/* Location toggle */
+.emergency-location-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--pure-white);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.emergency-location-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.emergency-toggle {
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  border: none;
+  background: var(--light-grey);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  padding: 0;
+}
+
+.emergency-toggle.active {
+  background: var(--sage-green);
+}
+
+.emergency-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--pure-white);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.emergency-toggle.active .emergency-toggle-thumb {
+  transform: translateX(24px);
+}
+
+/* SOS Section */
+.emergency-sos-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.emergency-sos-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.emergency-sos-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--soft-red);
+  opacity: 0.3;
+}
+
+.emergency-sos-ring-1 {
+  width: 120px;
+  height: 120px;
+  animation: pulseRing 2s ease-out infinite;
+}
+
+.emergency-sos-ring-2 {
+  width: 150px;
+  height: 150px;
+  animation: pulseRing 2s ease-out infinite 0.5s;
+}
+
+.emergency-sos-ring-3 {
+  width: 180px;
+  height: 180px;
+  animation: pulseRing 2s ease-out infinite 1s;
+}
+
+.emergency-sos-btn {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF6B6B, #ff5252);
+  border: none;
+  color: var(--pure-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sos);
+  z-index: 2;
+  transition: transform 0.2s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.emergency-sos-btn:active {
+  transform: scale(0.92);
+}
+
+.emergency-sos-icon {
+  font-size: 32px !important;
+}
+
+.emergency-sos-text {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.emergency-sos-desc {
+  font-size: 14px;
+  color: var(--medium-grey);
+  text-align: center;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+/* Hospitals */
+.emergency-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 14px;
+}
+
+.emergency-hospital-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.emergency-hospital-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--pure-white);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.emergency-hospital-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #FFE8EC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.emergency-hospital-info {
+  flex: 1;
+}
+
+.emergency-hospital-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.emergency-hospital-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emergency-hospital-type {
+  font-size: 12px;
+  color: var(--medium-grey);
+}
+
+.emergency-hospital-dist {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--deep-rose);
+}
+
+.emergency-call-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sage-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pure-white);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.emergency-call-btn:hover {
+  background: #6abd96;
+  transform: scale(1.05);
+}
+
+.emergency-call-btn:active {
+  transform: scale(0.95);
+}
+
+.emergency-call-btn .material-symbols-rounded {
+  font-size: 22px;
+}

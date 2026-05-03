@@ -1,0 +1,203 @@
+.scan-page {
+  min-height: 100vh;
+  background: var(--bg-surface);
+}
+
+.scan-content {
+  padding: 0 16px;
+}
+
+.scan-intro {
+  margin-bottom: 20px;
+}
+
+.scan-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+
+.scan-subtitle {
+  font-size: 14px;
+  color: var(--medium-grey);
+  line-height: 1.5;
+}
+
+/* Camera area */
+.scan-camera-area {
+  margin-bottom: 20px;
+}
+
+.scan-camera-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border: 2.5px dashed var(--blush-pink);
+  border-radius: var(--radius-xl);
+  background: var(--warm-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.scan-camera-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.scan-fingerprint-icon {
+  font-size: 56px !important;
+  color: var(--deep-rose);
+  opacity: 0.5;
+}
+
+.scan-instruction {
+  font-size: 14px;
+  color: var(--medium-grey);
+  max-width: 240px;
+}
+
+/* Corner markers */
+.scan-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: var(--deep-rose);
+  border-style: solid;
+  border-width: 0;
+}
+
+.scan-corner-tl { top: 12px; left: 12px; border-top-width: 3px; border-left-width: 3px; border-radius: 4px 0 0 0; }
+.scan-corner-tr { top: 12px; right: 12px; border-top-width: 3px; border-right-width: 3px; border-radius: 0 4px 0 0; }
+.scan-corner-bl { bottom: 12px; left: 12px; border-bottom-width: 3px; border-left-width: 3px; border-radius: 0 0 0 4px; }
+.scan-corner-br { bottom: 12px; right: 12px; border-bottom-width: 3px; border-right-width: 3px; border-radius: 0 0 4px 0; }
+
+/* Info banner */
+.scan-info-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFF0F4;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--charcoal);
+}
+
+/* Result card */
+.scan-result-card {
+  background: var(--pure-white);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+}
+
+.scan-result-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.scan-result-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.scan-result-date {
+  font-size: 12px;
+  color: var(--medium-grey);
+}
+
+/* Gauge */
+.scan-gauge-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 12px;
+}
+
+.scan-gauge-svg {
+  width: 180px;
+  height: 100px;
+}
+
+.scan-gauge-fill {
+  animation: circularProgress 1.5s ease-out;
+}
+
+.scan-gauge-needle {
+  transform-origin: 100px 100px;
+  animation: needleSweep 1.5s ease-out forwards;
+}
+
+@keyframes needleSweep {
+  from { transform: rotate(-90deg); }
+  to { transform: rotate(0deg); }
+}
+
+.scan-result-badge {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.scan-result-advice {
+  font-size: 14px;
+  color: var(--medium-grey);
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* History */
+.scan-history {
+  margin-bottom: 20px;
+}
+
+.scan-history-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 14px;
+}
+
+.scan-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scan-history-card {
+  background: var(--pure-white);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 4px solid var(--sage-green);
+}
+
+.scan-history-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scan-history-date {
+  font-size: 12px;
+  color: var(--medium-grey);
+}
+
+.scan-history-chevron {
+  color: var(--outline-variant);
+}

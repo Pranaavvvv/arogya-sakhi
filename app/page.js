@@ -1,66 +1,99 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import "./page.css";
 
-export default function Home() {
+const slides = [
+  {
+    icon: "🪷",
+    title: "Welcome to Aarogya Sakhi",
+    subtitle: "Your Gentle Companion for a Healthy Pregnancy",
+  },
+  {
+    icon: "💅",
+    title: "AI Anemia Detection",
+    subtitle: "Scan your fingernails to detect early signs of iron deficiency — quick, painless, anytime.",
+  },
+  {
+    icon: "🥗",
+    title: "Nutrition & Hydration",
+    subtitle: "Track your daily iron intake, log meals, and stay hydrated for you and your baby.",
+  },
+  {
+    icon: "🏥",
+    title: "Emergency SOS",
+    subtitle: "Instantly alert emergency contacts and find nearby hospitals when you need help most.",
+  },
+];
+
+export default function SplashPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => {
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="splash-page">
+      {/* Decorative elements */}
+      <div className="splash-decor splash-decor-1" />
+      <div className="splash-decor splash-decor-2" />
+      <div className="splash-decor splash-decor-3" />
+
+      {/* Skip button */}
+      {currentSlide < slides.length - 1 && (
+        <Link href="/login" className="splash-skip">Skip</Link>
+      )}
+
+      {/* Slide content */}
+      <div className="splash-content animate-fade-in" key={currentSlide}>
+        <div className="splash-illustration">
+          <div className="splash-icon-circle">
+            <span className="splash-emoji">{slides[currentSlide].icon}</span>
+          </div>
+          {/* Floating petals */}
+          <div className="splash-petal splash-petal-1" />
+          <div className="splash-petal splash-petal-2" />
+          <div className="splash-petal splash-petal-3" />
+        </div>
+
+        <div className="splash-card">
+          <h1 className="splash-title">{slides[currentSlide].title}</h1>
+          <p className="splash-subtitle">{slides[currentSlide].subtitle}</p>
+
+          {/* Dot indicators */}
+          <div className="splash-dots">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                className={`splash-dot ${i === currentSlide ? "active" : ""}`}
+                onClick={() => setCurrentSlide(i)}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* CTA */}
+          {currentSlide < slides.length - 1 ? (
+            <button className="btn btn-primary btn-full" onClick={nextSlide}>
+              Next
+              <span className="material-symbols-rounded">arrow_forward</span>
+            </button>
+          ) : (
+            <Link href="/login" className="btn btn-primary btn-full">
+              Get Started
+              <span className="material-symbols-rounded">arrow_forward</span>
+            </Link>
+          )}
+
+          <p className="splash-signin-link">
+            Already have an account?{" "}
+            <Link href="/login" className="splash-link">Sign in</Link>
           </p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }

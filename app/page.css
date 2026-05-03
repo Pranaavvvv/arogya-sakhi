@@ -1,0 +1,208 @@
+.splash-page {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(160deg, #FFD6E0 0%, #EAD6FF 50%, #d4c0f5 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  overflow: hidden;
+}
+
+/* Decorative circles */
+.splash-decor {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+}
+
+.splash-decor-1 {
+  width: 200px;
+  height: 200px;
+  background: var(--pure-white);
+  top: -60px;
+  right: -40px;
+}
+
+.splash-decor-2 {
+  width: 140px;
+  height: 140px;
+  background: var(--blush-pink);
+  bottom: 80px;
+  left: -40px;
+}
+
+.splash-decor-3 {
+  width: 100px;
+  height: 100px;
+  background: var(--soft-lavender);
+  top: 30%;
+  left: 10%;
+}
+
+/* Skip */
+.splash-skip {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  z-index: 10;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.2s ease;
+}
+
+.splash-skip:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Content */
+.splash-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Illustration area */
+.splash-illustration {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.splash-icon-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(16px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.splash-emoji {
+  font-size: 64px;
+}
+
+/* Floating petals */
+.splash-petal {
+  position: absolute;
+  border-radius: 50% 0 50% 50%;
+  opacity: 0.3;
+}
+
+.splash-petal-1 {
+  width: 24px;
+  height: 24px;
+  background: var(--pure-white);
+  top: 10px;
+  right: 20px;
+  animation: float 4s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.splash-petal-2 {
+  width: 16px;
+  height: 16px;
+  background: var(--blush-pink);
+  bottom: 30px;
+  left: 10px;
+  animation: float 3.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.splash-petal-3 {
+  width: 20px;
+  height: 20px;
+  background: var(--soft-lavender);
+  top: 40px;
+  left: 30px;
+  animation: float 4.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+/* Card */
+.splash-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-xl);
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(200, 130, 160, 0.15);
+}
+
+.splash-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.splash-subtitle {
+  font-size: 15px;
+  color: var(--medium-grey);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Dots */
+.splash-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.splash-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: var(--outline-variant);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.splash-dot.active {
+  width: 28px;
+  border-radius: 5px;
+  background: var(--deep-rose);
+}
+
+/* Sign in link */
+.splash-signin-link {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--medium-grey);
+}
+
+.splash-link {
+  color: var(--deep-rose);
+  font-weight: 600;
+}
+
+.splash-link:hover {
+  text-decoration: underline;
+}

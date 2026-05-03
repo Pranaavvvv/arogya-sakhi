@@ -1,0 +1,304 @@
+.dashboard-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg-surface);
+  padding-bottom: var(--nav-height);
+}
+
+/* ── Header ──────────────────────────────── */
+.dash-header {
+  position: relative;
+  padding: 20px 20px 28px;
+  overflow: hidden;
+}
+
+.dash-header-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #FFD6E0 0%, #f0c8e8 50%, #EAD6FF 100%);
+  border-radius: 0 0 32px 32px;
+}
+
+.dash-header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.dash-greeting {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.dash-greeting-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(61, 61, 61, 0.6);
+  margin-bottom: 2px;
+}
+
+.dash-greeting-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.dash-greeting-sub {
+  font-size: 14px;
+  color: var(--medium-grey);
+}
+
+.dash-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dash-notify-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--charcoal);
+  transition: background 0.2s ease;
+}
+
+.dash-notify-btn:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.dash-notify-dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--soft-red);
+  border-radius: 50%;
+  border: 2px solid var(--blush-pink);
+}
+
+.dash-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid var(--deep-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep-rose);
+}
+
+.dash-avatar .material-symbols-rounded {
+  font-size: 22px;
+}
+
+/* ── Metrics ─────────────────────────────── */
+.dash-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 0 16px;
+  margin-top: -12px;
+}
+
+.dash-metric-card {
+  background: var(--pure-white);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease;
+}
+
+.dash-metric-card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.dash-metric-risk {
+  background: #FFFDF5;
+}
+
+.dash-metric-iron {
+  background: var(--pure-white);
+}
+
+.dash-metric-hydration {
+  background: #F5FDFF;
+  grid-column: span 2;
+}
+
+.dash-metric-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.dash-metric-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--medium-grey);
+}
+
+.dash-metric-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1;
+}
+
+.dash-metric-sub {
+  font-size: 12px;
+  color: var(--medium-grey);
+  margin-top: 2px;
+}
+
+/* Gauge */
+.dash-gauge-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.dash-gauge-svg {
+  width: 120px;
+  height: 72px;
+}
+
+.dash-gauge-fill {
+  animation: circularProgress 1.2s ease-out;
+}
+
+/* Ring */
+.dash-ring-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px auto;
+}
+
+.dash-ring-svg {
+  width: 100px;
+  height: 100px;
+}
+
+.dash-ring-fill {
+  animation: circularProgress 1.2s ease-out;
+}
+
+.dash-ring-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dash-ring-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.dash-ring-total {
+  font-size: 11px;
+  color: var(--medium-grey);
+}
+
+/* ── Sections ────────────────────────────── */
+.dash-section {
+  padding: 20px 16px 0;
+}
+
+.dash-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 14px;
+}
+
+/* Quick Actions */
+.dash-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.dash-action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 12px 4px;
+  border-radius: var(--radius-lg);
+  background: var(--pure-white);
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+}
+
+.dash-action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.dash-action-card:active {
+  transform: scale(0.96);
+}
+
+.dash-action-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dash-action-icon .material-symbols-rounded {
+  font-size: 26px;
+  color: var(--charcoal);
+}
+
+.dash-action-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+/* Tip */
+.dash-tip-card {
+  background: var(--mint-green);
+  border-radius: var(--radius-lg);
+  padding: 18px 16px;
+}
+
+.dash-tip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.dash-tip-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e7d5a;
+}
+
+.dash-tip-text {
+  font-size: 14px;
+  color: #3D6B55;
+  line-height: 1.6;
+}

@@ -1,0 +1,227 @@
+.hydration-page {
+  min-height: 100vh;
+  background: var(--bg-surface);
+  position: relative;
+}
+
+.hydration-content {
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.hydration-intro {
+  margin-bottom: 16px;
+}
+
+.hydration-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+
+.hydration-subtitle {
+  font-size: 14px;
+  color: var(--medium-grey);
+}
+
+/* Ring section */
+.hydration-ring-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.hydration-ring-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hydration-ring-svg {
+  width: 200px;
+  height: 200px;
+}
+
+.hydration-ring-fill {
+  animation: circularProgress 1.2s ease-out;
+}
+
+.hydration-ring-center {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hydration-drop-icon {
+  font-size: 28px !important;
+  color: #4DD0E1;
+  margin-bottom: 2px;
+}
+
+.hydration-ring-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1;
+}
+
+.hydration-ring-target {
+  font-size: 13px;
+  color: var(--medium-grey);
+  margin-top: 2px;
+}
+
+.hydration-pct {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4DD0E1;
+  margin-top: 10px;
+}
+
+/* Quick adds */
+.hydration-quick-adds {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.hydration-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--soft-aqua);
+  background: var(--pure-white);
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 600;
+  color: #00838F;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hydration-add-btn:hover {
+  background: #E0F7FA;
+  border-color: #4DD0E1;
+}
+
+.hydration-add-btn:active {
+  transform: scale(0.95);
+}
+
+/* Reminder */
+.hydration-reminder {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #E0F7FA;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.hydration-reminder-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(77, 208, 225, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hydration-reminder-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #00838F;
+  margin-bottom: 2px;
+}
+
+.hydration-reminder-text {
+  font-size: 13px;
+  color: #4f8a91;
+}
+
+/* History */
+.hydration-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 14px;
+}
+
+.hydration-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 16px;
+  border-left: 2px solid #E0F7FA;
+  margin-left: 8px;
+}
+
+.hydration-timeline-item {
+  position: relative;
+  padding: 8px 0 8px 20px;
+}
+
+.hydration-timeline-dot {
+  position: absolute;
+  left: -9px;
+  top: 14px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #4DD0E1;
+  border: 3px solid #E0F7FA;
+}
+
+.hydration-timeline-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--pure-white);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.hydration-timeline-icon {
+  font-size: 20px;
+}
+
+.hydration-timeline-amount {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--charcoal);
+  display: block;
+}
+
+.hydration-timeline-time {
+  font-size: 12px;
+  color: var(--medium-grey);
+}
+
+/* Wave */
+.hydration-wave-wrapper {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+  margin-top: -20px;
+}
+
+.hydration-wave-svg {
+  width: 200%;
+  height: 60px;
+  animation: waveMove 8s linear infinite;
+}

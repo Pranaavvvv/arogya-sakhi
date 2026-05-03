@@ -1,0 +1,205 @@
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(160deg, #FFD6E0 0%, #f0c8e0 40%, #EAD6FF 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 32px;
+  overflow: hidden;
+}
+
+.login-bg-decor {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+.login-bg-1 {
+  width: 250px;
+  height: 250px;
+  background: var(--pure-white);
+  top: -80px;
+  left: -60px;
+}
+
+.login-bg-2 {
+  width: 180px;
+  height: 180px;
+  background: var(--soft-lavender);
+  bottom: -40px;
+  right: -50px;
+}
+
+/* Illustration */
+.login-illustration {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-wreath {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wreath-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.wreath-leaf {
+  position: absolute;
+  font-size: 22px;
+}
+
+.wreath-leaf-1 { top: -5px; left: 50%; transform: translateX(-50%); }
+.wreath-leaf-2 { top: 15px; right: -5px; }
+.wreath-leaf-3 { bottom: 15px; right: -5px; }
+.wreath-leaf-4 { bottom: -5px; left: 50%; transform: translateX(-50%); }
+.wreath-leaf-5 { bottom: 15px; left: -5px; }
+.wreath-leaf-6 { top: 15px; left: -5px; }
+
+.login-lotus {
+  font-size: 44px;
+  z-index: 2;
+}
+
+/* Card */
+.login-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px 32px;
+  box-shadow: 0 8px 40px rgba(200, 130, 160, 0.15);
+}
+
+/* Tabs */
+.login-tabs {
+  display: flex;
+  background: var(--light-grey);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.login-tab {
+  flex: 1;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--medium-grey);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-tab.active {
+  background: var(--pure-white);
+  color: var(--deep-rose);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+.login-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-align: center;
+}
+
+.login-subheading {
+  font-size: 14px;
+  color: var(--medium-grey);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.login-forgot {
+  text-align: right;
+  margin-top: -8px;
+}
+
+.login-forgot-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--deep-rose);
+}
+
+/* Divider */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0;
+}
+
+.login-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--outline-variant);
+}
+
+.login-divider-text {
+  font-size: 12px;
+  color: var(--medium-grey);
+  white-space: nowrap;
+}
+
+/* Social */
+.login-social {
+  display: flex;
+  gap: 12px;
+}
+
+.login-social-btn {
+  flex: 1;
+  height: 48px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--light-grey);
+  background: var(--pure-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.login-social-btn:hover {
+  border-color: var(--outline-variant);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.login-social-btn:active {
+  transform: scale(0.97);
+}

@@ -1,0 +1,254 @@
+.nutrition-page {
+  min-height: 100vh;
+  background: var(--bg-surface);
+}
+
+.nutrition-content {
+  padding: 0 16px;
+}
+
+.nutrition-intro {
+  margin-bottom: 20px;
+}
+
+.nutrition-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+
+.nutrition-subtitle {
+  font-size: 14px;
+  color: var(--medium-grey);
+}
+
+/* Iron Card */
+.nutrition-iron-card {
+  background: var(--pure-white);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 16px;
+}
+
+.nutrition-iron-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.nutrition-iron-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.nutrition-iron-target {
+  font-size: 12px;
+  color: var(--medium-grey);
+}
+
+.nutrition-iron-pct {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--sage-green);
+}
+
+.nutrition-iron-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--medium-grey);
+}
+
+/* Log Card */
+.nutrition-log-card {
+  background: var(--pure-white);
+  border-radius: var(--radius-xl);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 20px;
+}
+
+.nutrition-log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.nutrition-log-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nutrition-log-title-row h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.nutrition-log-form {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nutrition-log-row {
+  display: flex;
+  gap: 12px;
+}
+
+/* Section titles */
+.nutrition-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 14px;
+}
+
+/* Meals */
+.nutrition-today {
+  margin-bottom: 20px;
+}
+
+.nutrition-meals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nutrition-meal-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--pure-white);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.nutrition-meal-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--mint-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.nutrition-meal-info {
+  flex: 1;
+}
+
+.nutrition-meal-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.nutrition-meal-meta {
+  font-size: 12px;
+  color: var(--medium-grey);
+  margin-top: 2px;
+}
+
+/* Recommended chips */
+.nutrition-recommended {
+  margin-bottom: 20px;
+}
+
+.nutrition-chips-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.nutrition-chips-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.nutrition-food-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pure-white);
+  border: 1.5px solid var(--blush-pink);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition: all 0.2s ease;
+}
+
+.nutrition-food-chip:hover {
+  background: var(--blush-pink);
+  border-color: var(--deep-rose);
+}
+
+.nutrition-food-emoji {
+  font-size: 18px;
+}
+
+.nutrition-food-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.nutrition-food-iron {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--sage-green);
+}
+
+/* FAB */
+.nutrition-fab {
+  position: fixed;
+  bottom: 80px;
+  right: calc(50% - 215px + 20px);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--deep-rose);
+  color: var(--pure-white);
+  border: none;
+  box-shadow: var(--shadow-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.2s ease;
+}
+
+.nutrition-fab:hover {
+  background: var(--deep-rose-hover);
+  transform: scale(1.05);
+}
+
+.nutrition-fab:active {
+  transform: scale(0.95);
+}
+
+.nutrition-fab .material-symbols-rounded {
+  font-size: 28px;
+}
+
+@media (max-width: 430px) {
+  .nutrition-fab {
+    right: 20px;
+  }
+}
