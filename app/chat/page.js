@@ -33,6 +33,15 @@ const quickReplies = [
   "Exercise tips",
 ];
 
+const faqResponses = {
+  "iron-rich recipes": "Here's a quick recipe: **Palak Dal** (Spinach & Lentils). Boil 1 cup lentils with turmeric. In a pan, sauté cumin, onions, garlic, and 2 cups chopped spinach. Mix with lentils and add a dash of lemon juice for Vitamin C! 🍲",
+  "my anemia risk": "Your last scan showed a **Moderate Risk**. It's important to continue logging your meals and drinking plenty of water. If you feel dizzy or unusually tired, please consult your doctor. 🩺",
+  "water reminder": "Staying hydrated is crucial! You should aim for about 2.5 to 3 liters of water a day during pregnancy. I can send you a reminder every 2 hours if you'd like! 💧",
+  "when to see doctor?": "You should contact your doctor immediately if you experience: severe headaches, vision changes, sudden swelling in your hands/face, decreased fetal movement, or vaginal bleeding. For regular checkups, please follow your scheduled appointments. 🏥",
+  "exercise tips": "Light exercises like walking, prenatal yoga, and swimming are great! Avoid activities with a high risk of falling or abdominal trauma. Always listen to your body and consult your doctor before starting any new routine. 🧘‍♀️",
+  "default": "Thank you for sharing! I'm here to help you with any concerns about your pregnancy health journey. Would you like to know more about nutrition, hydration, or anemia prevention? 🌸"
+};
+
 function ChatPageContent() {
   const [messages, setMessages] = useState(initialMessages);
   const [inputText, setInputText] = useState("");
@@ -56,10 +65,20 @@ function ChatPageContent() {
 
     // Simulate bot response
     setTimeout(() => {
+      const lowerText = text.trim().toLowerCase();
+      let responseText = faqResponses["default"];
+      
+      for (const [key, answer] of Object.entries(faqResponses)) {
+        if (key !== "default" && lowerText.includes(key)) {
+          responseText = answer;
+          break;
+        }
+      }
+
       const botMsg = {
         id: messages.length + 2,
         type: "bot",
-        text: "Thank you for your question! I'm here to help you with any concerns about your pregnancy health journey. Would you like to know more about nutrition, hydration, or anemia prevention? 🌸",
+        text: responseText,
         time: new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }),
       };
       setMessages((prev) => [...prev, botMsg]);
