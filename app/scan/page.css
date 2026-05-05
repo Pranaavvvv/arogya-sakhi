@@ -29,39 +29,157 @@
   margin-bottom: 20px;
 }
 
+.scan-camera-area .btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .scan-camera-frame {
   position: relative;
   width: 100%;
   aspect-ratio: 4/3;
-  border: 2.5px dashed var(--blush-pink);
+  border: 2.5px solid var(--blush-pink);
   border-radius: var(--radius-xl);
-  background: var(--warm-white);
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 
-.scan-camera-inner {
+/* Live feed */
+.scan-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.scan-video-darken {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.05) 40%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+  pointer-events: none;
+}
+
+.scan-active-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: calc(var(--radius-xl) - 2px);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.scan-line {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(125, 203, 164, 0.4) 20%,
+    var(--sage-green) 50%,
+    rgba(125, 203, 164, 0.4) 80%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 12px rgba(125, 203, 164, 0.9),
+    0 0 24px rgba(125, 203, 164, 0.45);
+  animation: scanLineSweep 2s linear infinite;
+}
+
+@keyframes scanLineSweep {
+  0% {
+    top: 8%;
+  }
+  100% {
+    top: calc(92% - 3px);
+  }
+}
+
+.scan-status-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--pure-white);
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.scan-status-icon {
+  font-size: 18px !important;
+  color: var(--mint-green);
+}
+
+/* Loading / permission error overlay */
+.scan-camera-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  padding: 24px;
+  padding: 20px;
   text-align: center;
+  background: var(--warm-white);
 }
 
-.scan-fingerprint-icon {
-  font-size: 56px !important;
-  color: var(--deep-rose);
-  opacity: 0.5;
-}
-
-.scan-instruction {
+.scan-placeholder-text {
   font-size: 14px;
   color: var(--medium-grey);
-  max-width: 240px;
+  line-height: 1.45;
+  max-width: 260px;
+}
+
+.scan-placeholder-icon {
+  font-size: 48px !important;
+  color: var(--deep-rose);
+  opacity: 0.85;
+}
+
+.scan-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--light-grey);
+  border-top-color: var(--deep-rose);
+  border-radius: 50%;
+  animation: scanSpin 0.75s linear infinite;
+}
+
+@keyframes scanSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.scan-retry-camera {
+  margin-top: 4px;
 }
 
 /* Corner markers */
@@ -92,26 +210,43 @@
   color: var(--charcoal);
 }
 
-/* Result card */
+/* Result card — success */
 .scan-result-card {
   background: var(--pure-white);
   border-radius: var(--radius-xl);
-  padding: 20px;
+  padding: 24px 20px;
   box-shadow: var(--shadow-card);
   margin-bottom: 24px;
 }
 
-.scan-result-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+.scan-result-success {
+  text-align: center;
+  border: 1px solid rgba(125, 203, 164, 0.35);
+  background: linear-gradient(180deg, rgba(200, 245, 225, 0.35) 0%, var(--pure-white) 48%);
 }
 
-.scan-result-title {
-  font-size: 16px;
-  font-weight: 600;
+.scan-result-success-icon-wrap {
+  margin-bottom: 12px;
+}
+
+.scan-result-success-icon {
+  font-size: 56px !important;
+  color: var(--sage-green);
+  font-variation-settings: "FILL" 1;
+}
+
+.scan-result-success-title {
+  font-size: 18px;
+  font-weight: 700;
   color: var(--charcoal);
+  margin-bottom: 8px;
+}
+
+.scan-result-success-sub {
+  font-size: 14px;
+  color: var(--medium-grey);
+  line-height: 1.55;
+  margin-bottom: 12px;
 }
 
 .scan-result-date {
@@ -119,43 +254,8 @@
   color: var(--medium-grey);
 }
 
-/* Gauge */
-.scan-gauge-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 8px 0 12px;
-}
-
-.scan-gauge-svg {
-  width: 180px;
-  height: 100px;
-}
-
-.scan-gauge-fill {
-  animation: circularProgress 1.5s ease-out;
-}
-
-.scan-gauge-needle {
-  transform-origin: 100px 100px;
-  animation: needleSweep 1.5s ease-out forwards;
-}
-
-@keyframes needleSweep {
-  from { transform: rotate(-90deg); }
-  to { transform: rotate(0deg); }
-}
-
-.scan-result-badge {
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.scan-result-advice {
-  font-size: 14px;
-  color: var(--medium-grey);
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 16px;
+.scan-result-success-time {
+  margin-bottom: 0;
 }
 
 /* History */

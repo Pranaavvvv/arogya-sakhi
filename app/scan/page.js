@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import AppHeader from "../../components/AppHeader";
 import BottomNav from "../../components/BottomNav";
 import "./page.css";
@@ -10,8 +10,133 @@ const recentScans = [
   { date: "Sep 10, 2023", risk: "Low Risk", level: "low" },
 ];
 
+const SCAN_DURATION_MS = 4000;
+
+/** Request camera with mobile-friendly constraints (front camera ideal for nail self-check; fall back to any camera). */
+async function requestCameraStream() {
+  if (typeof window === "undefined" || !navigator.mediaDevices?.getUserMedia) {
+    throw new Error("Camera API not available. Use HTTPS or a supported browser.");
+  }
+
+  const baseVideo = {
+    width: { ideal: 1280 },
+    height: { ideal: 720 },
+  };
+
+  try {
+    return await navigator.mediaDevices.getUserMedia({
+      video: {
+        ...baseVideo,
+        facingMode: { ideal: "user" },
+      },
+      audio: false,
+    });
+  } catch {
+    try {
+      return await navigator.mediaDevices.getUserMedia({
+        video: {
+          ...baseVideo,
+          facingMode: { ideal: "environment" },
+        },
+        audio: false,
+      });
+    } catch {
+      return await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    }
+  }
+}
+
 export default function ScanPage() {
-  const [scanned, setScanned] = useState(true);
+  const videoRef = useRef(null);
+  const streamRef = useRef(null);
+  const scanTimerRef = useRef(null);
+
+  const [cameraState, setCameraState] = useState("loading");
+  const [cameraError, setCameraError] = useState("");
+  const [isScanning, setIsScanning] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+
+  const attachStream = useCallback(async (stream) => {
+    streamRef.current = stream;
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.srcObject = stream;
+    video.muted = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    try {
+      await video.play();
+    } catch {
+      /* play() can reject on some browsers; stream still shows */
+    }
+  }, []);
+
+  const startCamera = useCallback(async () => {
+    setCameraState("loading");
+    setCameraError("");
+
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+      streamRef.current = null;
+    }
+
+    try {
+      const stream = await requestCameraStream();
+      await attachStream(stream);
+      setCameraState("ready");
+    } catch (err) {
+      const name = err?.name || "";
+      if (name === "NotAllowedError" || name === "PermissionDeniedError") {
+        setCameraState("denied");
+        setCameraError("Camera access was blocked. Allow camera in your browser or site settings, then try again.");
+      } else if (name === "NotFoundError" || name === "DevicesNotFoundError") {
+        setCameraState("unavailable");
+        setCameraError("No camera was found on this device.");
+      } else if (name === "NotReadableError" || name === "TrackStartError") {
+        setCameraState("unavailable");
+        setCameraError("The camera is in use or could not be started. Close other apps using the camera and try again.");
+      } else {
+        setCameraState("unavailable");
+        setCameraError(err?.message || "Could not start the camera.");
+      }
+    }
+  }, [attachStream]);
+
+  useEffect(() => {
+    startCamera();
+    return () => {
+      if (scanTimerRef.current) {
+        clearTimeout(scanTimerRef.current);
+        scanTimerRef.current = null;
+      }
+      streamRef.current?.getTracks().forEach((t) => t.stop());
+      streamRef.current = null;
+    };
+  }, [startCamera]);
+
+  const handleStartScan = () => {
+    if (cameraState !== "ready" || isScanning) return;
+    setShowResult(false);
+    setIsScanning(true);
+
+    if (scanTimerRef.current) clearTimeout(scanTimerRef.current);
+    scanTimerRef.current = window.setTimeout(() => {
+      setIsScanning(false);
+      setShowResult(true);
+      scanTimerRef.current = null;
+    }, SCAN_DURATION_MS);
+  };
+
+  const formatNow = () =>
+    new Date().toLocaleString(undefined, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
 
   return (
     <div className="scan-page">
@@ -26,75 +151,85 @@ export default function ScanPage() {
         {/* Camera preview */}
         <div className="scan-camera-area">
           <div className="scan-camera-frame">
-            <div className="scan-camera-inner">
-              <span className="material-symbols-rounded scan-fingerprint-icon">fingerprint</span>
-              <p className="scan-instruction">Align your fingernails within the frame and press scan.</p>
-            </div>
-            {/* Corner markers */}
-            <div className="scan-corner scan-corner-tl" />
-            <div className="scan-corner scan-corner-tr" />
-            <div className="scan-corner scan-corner-bl" />
-            <div className="scan-corner scan-corner-br" />
+            <video
+              ref={videoRef}
+              className="scan-video"
+              playsInline
+              muted
+              autoPlay
+              aria-label="Camera preview for nail scan"
+            />
+
+            {(cameraState === "loading" || cameraState === "denied" || cameraState === "unavailable") && (
+              <div className="scan-camera-placeholder">
+                {cameraState === "loading" && (
+                  <>
+                    <span className="scan-loading-spinner" aria-hidden />
+                    <p className="scan-placeholder-text">Starting camera…</p>
+                  </>
+                )}
+                {(cameraState === "denied" || cameraState === "unavailable") && (
+                  <>
+                    <span className="material-symbols-rounded scan-placeholder-icon">videocam_off</span>
+                    <p className="scan-placeholder-text">{cameraError}</p>
+                    <button type="button" className="btn btn-primary scan-retry-camera" onClick={startCamera}>
+                      Try again
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+
+            {cameraState === "ready" && (
+              <>
+                <div className="scan-video-darken" aria-hidden />
+                <div className="scan-active-overlay" data-scanning={isScanning ? "true" : "false"}>
+                  <div className="scan-corner scan-corner-tl" />
+                  <div className="scan-corner scan-corner-tr" />
+                  <div className="scan-corner scan-corner-bl" />
+                  <div className="scan-corner scan-corner-br" />
+                  {isScanning && <div className="scan-line" aria-hidden />}
+                </div>
+                {isScanning && (
+                  <div className="scan-status-badge">
+                    <span className="material-symbols-rounded scan-status-icon">center_focus_strong</span>
+                    Scanning…
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           <div className="scan-info-banner">
-            <span className="material-symbols-rounded" style={{ color: "#E8728A", fontSize: 20 }}>info</span>
+            <span className="material-symbols-rounded" style={{ color: "#E8728A", fontSize: 20 }}>
+              info
+            </span>
             <span>Align your fingernails within the frame and press scan.</span>
           </div>
 
           <button
+            type="button"
             className="btn btn-primary btn-full"
-            onClick={() => setScanned(true)}
+            onClick={handleStartScan}
             id="start-scan-btn"
+            disabled={cameraState !== "ready" || isScanning}
           >
             <span className="material-symbols-rounded">center_focus_strong</span>
-            Start Scan
+            {isScanning ? "Scanning…" : "Start Scan"}
           </button>
         </div>
 
         {/* Result card */}
-        {scanned && (
-          <div className="scan-result-card animate-fade-in-up">
-            <div className="scan-result-header">
-              <span className="material-symbols-rounded icon-filled" style={{ color: "#E8728A" }}>fact_check</span>
-              <div>
-                <h3 className="scan-result-title">Scan Complete</h3>
-                <p className="scan-result-date">Today, 10:42 AM</p>
-              </div>
+        {showResult && (
+          <div className="scan-result-card scan-result-success animate-fade-in-up">
+            <div className="scan-result-success-icon-wrap">
+              <span className="material-symbols-rounded scan-result-success-icon" aria-hidden>
+                check_circle
+              </span>
             </div>
-
-            {/* Semicircle gauge */}
-            <div className="scan-gauge-wrapper">
-              <svg viewBox="0 0 200 110" className="scan-gauge-svg">
-                <defs>
-                  <linearGradient id="scanGaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#7DCBA4" />
-                    <stop offset="50%" stopColor="#FFF176" />
-                    <stop offset="100%" stopColor="#FF6B6B" />
-                  </linearGradient>
-                </defs>
-                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#F2F2F2" strokeWidth="14" strokeLinecap="round" />
-                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#scanGaugeGrad)" strokeWidth="14" strokeLinecap="round"
-                  strokeDasharray="251" strokeDashoffset="125" className="scan-gauge-fill" />
-                {/* Needle */}
-                <line x1="100" y1="100" x2="100" y2="35" stroke="#E8728A" strokeWidth="3" strokeLinecap="round"
-                  className="scan-gauge-needle" />
-                <circle cx="100" cy="100" r="6" fill="#E8728A" />
-              </svg>
-            </div>
-
-            <div className="scan-result-badge">
-              <span className="badge badge-warning">Moderate Anemia Risk Detected</span>
-            </div>
-
-            <p className="scan-result-advice">
-              Your fingernail pallor suggests potential iron deficiency. Please consult your doctor for a detailed blood test.
-            </p>
-
-            <button className="btn btn-tonal btn-full" id="scan-consult-btn">
-              <span className="material-symbols-rounded">medical_services</span>
-              Consult Doctor
-            </button>
+            <h3 className="scan-result-success-title">No Anemia Detected</h3>
+            <p className="scan-result-success-sub">Your scan looks healthy. Keep following your care plan.</p>
+            <p className="scan-result-date scan-result-success-time">{formatNow()}</p>
           </div>
         )}
 
@@ -105,7 +240,15 @@ export default function ScanPage() {
             {recentScans.map((scan, i) => (
               <div key={i} className={`scan-history-card card-accent-left risk-${scan.level}`}>
                 <div className="scan-history-info">
-                  <span className={`badge ${scan.level === "low" ? "badge-success" : scan.level === "moderate" ? "badge-warning" : "badge-danger"}`}>
+                  <span
+                    className={`badge ${
+                      scan.level === "low"
+                        ? "badge-success"
+                        : scan.level === "moderate"
+                          ? "badge-warning"
+                          : "badge-danger"
+                    }`}
+                  >
                     {scan.risk}
                   </span>
                   <span className="scan-history-date">{scan.date}</span>
