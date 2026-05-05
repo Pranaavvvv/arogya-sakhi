@@ -2,6 +2,7 @@
 import { useState } from "react";
 import AppHeader from "../../components/AppHeader";
 import BottomNav from "../../components/BottomNav";
+import ProtectedRoute from "../../components/ProtectedRoute";
 import "./page.css";
 
 const quickAdds = [
@@ -19,7 +20,7 @@ const history = [
   { time: "5:00 PM", amount: "200ml", icon: "🍵" },
 ];
 
-export default function HydrationPage() {
+function HydrationPageContent() {
   const [intake, setIntake] = useState(1200);
   const target = 2500;
   const pct = Math.min(Math.round((intake / target) * 100), 100);
@@ -123,5 +124,13 @@ export default function HydrationPage() {
       <div style={{ height: 80 }} />
       <BottomNav />
     </div>
+  );
+}
+
+export default function HydrationPage() {
+  return (
+    <ProtectedRoute>
+      <HydrationPageContent />
+    </ProtectedRoute>
   );
 }

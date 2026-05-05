@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import AppHeader from "../../components/AppHeader";
 import BottomNav from "../../components/BottomNav";
+import ProtectedRoute from "../../components/ProtectedRoute";
 import "./page.css";
 
 const recentScans = [
@@ -46,7 +47,7 @@ async function requestCameraStream() {
   }
 }
 
-export default function ScanPage() {
+function ScanPageContent() {
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const scanTimerRef = useRef(null);
@@ -263,5 +264,13 @@ export default function ScanPage() {
       <div style={{ height: 80 }} />
       <BottomNav />
     </div>
+  );
+}
+
+export default function ScanPage() {
+  return (
+    <ProtectedRoute>
+      <ScanPageContent />
+    </ProtectedRoute>
   );
 }

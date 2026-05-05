@@ -2,6 +2,7 @@
 import { useState } from "react";
 import AppHeader from "../../components/AppHeader";
 import BottomNav from "../../components/BottomNav";
+import ProtectedRoute from "../../components/ProtectedRoute";
 import "./page.css";
 
 const todayMeals = [
@@ -18,7 +19,7 @@ const recommended = [
   { name: "Chickpeas", emoji: "🫘", iron: "2.4mg" },
 ];
 
-export default function NutritionPage() {
+function NutritionPageContent() {
   const [showLogForm, setShowLogForm] = useState(false);
 
   return (
@@ -127,5 +128,13 @@ export default function NutritionPage() {
       <div style={{ height: 80 }} />
       <BottomNav />
     </div>
+  );
+}
+
+export default function NutritionPage() {
+  return (
+    <ProtectedRoute>
+      <NutritionPageContent />
+    </ProtectedRoute>
   );
 }

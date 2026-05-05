@@ -2,6 +2,7 @@
 import { useState } from "react";
 import AppHeader from "../../components/AppHeader";
 import BottomNav from "../../components/BottomNav";
+import ProtectedRoute from "../../components/ProtectedRoute";
 import "./page.css";
 
 const hospitals = [
@@ -10,7 +11,7 @@ const hospitals = [
   { name: "General Hospital", distance: "2.2km", phone: "+91 98765 43212", type: "General" },
 ];
 
-export default function EmergencyPage() {
+function EmergencyPageContent() {
   const [shareLocation, setShareLocation] = useState(true);
 
   return (
@@ -80,5 +81,13 @@ export default function EmergencyPage() {
       <div style={{ height: 80 }} />
       <BottomNav />
     </div>
+  );
+}
+
+export default function EmergencyPage() {
+  return (
+    <ProtectedRoute>
+      <EmergencyPageContent />
+    </ProtectedRoute>
   );
 }

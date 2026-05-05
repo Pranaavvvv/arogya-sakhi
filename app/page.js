@@ -1,6 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../contexts/AuthContext";
 import "./page.css";
 
 const slides = [
@@ -28,6 +30,16 @@ const slides = [
 
 export default function SplashPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
+  const { isAuthenticated, isReady } = useAuth();
+
+  useEffect(() => {
+    if (isReady && isAuthenticated) {
+      router.replace("/dashboard");
+    }
+  }, [isReady, isAuthenticated, router]);
+
+  const authHref = isReady && isAuthenticated ? "/dashboard" : "/login";
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
@@ -44,7 +56,7 @@ export default function SplashPage() {
 
       {/* Skip button */}
       {currentSlide < slides.length - 1 && (
-        <Link href="/login" className="splash-skip">Skip</Link>
+        <Link href={authHref} className="splash-skip">Skip</Link>
       )}
 
       {/* Slide content */}
@@ -82,7 +94,7 @@ export default function SplashPage() {
               <span className="material-symbols-rounded">arrow_forward</span>
             </button>
           ) : (
-            <Link href="/login" className="btn btn-primary btn-full">
+            <Link href={authHref} className="btn btn-primary btn-full">
               Get Started
               <span className="material-symbols-rounded">arrow_forward</span>
             </Link>
@@ -90,7 +102,7 @@ export default function SplashPage() {
 
           <p className="splash-signin-link">
             Already have an account?{" "}
-            <Link href="/login" className="splash-link">Sign in</Link>
+            <Link href={authHref} className="splash-link">Sign in</Link>
           </p>
         </div>
       </div>

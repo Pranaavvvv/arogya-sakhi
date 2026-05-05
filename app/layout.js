@@ -1,4 +1,5 @@
 import "./globals.css";
+import Providers from "../components/Providers";
 
 export const metadata = {
   title: "Aarogya Sakhi — Your Gentle Companion for a Healthy Pregnancy",
@@ -21,9 +22,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <div className="app-frame">
-          {children}
-        </div>
+        <Providers>
+          <div className="app-frame">{children}</div>
+        </Providers>
       </body>
     </html>
   );

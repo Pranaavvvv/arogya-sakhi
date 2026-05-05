@@ -133,6 +133,16 @@
   text-align: center;
 }
 
+.login-error {
+  font-size: 13px;
+  color: #c62828;
+  background: rgba(198, 40, 40, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
 .login-subheading {
   font-size: 14px;
   color: var(--medium-grey);

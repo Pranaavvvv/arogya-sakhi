@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import BottomNav from "../../components/BottomNav";
+import ProtectedRoute from "../../components/ProtectedRoute";
 import "./page.css";
 
 const initialMessages = [
@@ -32,7 +33,7 @@ const quickReplies = [
   "Exercise tips",
 ];
 
-export default function ChatPage() {
+function ChatPageContent() {
   const [messages, setMessages] = useState(initialMessages);
   const [inputText, setInputText] = useState("");
   const [lang, setLang] = useState("en");
@@ -159,5 +160,13 @@ export default function ChatPage() {
 
       <BottomNav />
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <ProtectedRoute>
+      <ChatPageContent />
+    </ProtectedRoute>
   );
 }

@@ -102,6 +102,33 @@
   font-size: 22px;
 }
 
+.dash-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dash-logout-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--charcoal);
+  transition: background 0.2s ease;
+}
+
+.dash-logout-btn:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
 /* ── Metrics ─────────────────────────────── */
 .dash-metrics {
   display: grid;
